@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine  # Smaller, faster
+    container_name: resume_analyzer_db
+    environment:
+      POSTGRES_DB: resume_analyzer
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: resume_analyzer_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres123@postgres:5432/resume_analyzer
+      - AI_MODE=${AI_MODE:-auto}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
+      - HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN:-}
+      - FAST_MODE=${FAST_MODE:-false}
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key-change-in-production}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - upload_data:/app/uploads
+      - model_cache:/root/.cache  # Cache models locally
+
+  frontend:
+    build: ./frontend
+    container_name: resume_analyzer_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  upload_data:
+  model_cache:  # Persistent model cache for faster restarts

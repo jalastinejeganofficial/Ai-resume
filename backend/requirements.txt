@@ -1,0 +1,33 @@
+fastapi==0.109.0
+uvicorn==0.27.0
+sqlalchemy==2.0.25
+psycopg2-binary==2.9.9
+alembic==1.13.1
+python-jose[cryptography]==3.3.0
+python-multipart==0.0.6
+pydantic==2.5.3
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+passlib[bcrypt]==1.7.4
+
+# Document Parsing (Local - Lightweight, No Cloud API)
+PyPDF2==3.0.1
+pdfplumber==0.10.3
+python-docx==1.1.0
+spacy==3.7.2
+
+# NLP & Semantic Analysis (CPU-optimized, works on any PC)
+sentence-transformers==2.2.2
+rake-nltk==1.0.6
+textstat==0.7.1
+nltk==3.8.1
+
+# Cloud AI Fallback (FREE tiers - for old PCs)
+openai==1.10.0
+requests==2.31.0
+
+# Rate Limiting
+slowapi==0.1.9
+
+# System Info (for auto-detection)
+psutil==5.9.7

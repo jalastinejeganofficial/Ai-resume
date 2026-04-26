@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Combined OS Color Palette */
+  --os-bg-primary: #0d1117;
+  --os-bg-secondary: #161b22;
+  --os-bg-tertiary: #1f2937;
+  --os-bg-glass: rgba(22, 27, 34, 0.85);
+  --os-border: rgba(48, 54, 61, 0.8);
+  --os-border-light: rgba(99, 110, 123, 0.3);
+
+  /* macOS accent - blue */
+  --mac-accent: #0a84ff;
+  --mac-accent-hover: #409cff;
+
+  /* Windows accent - teal/cyan */
+  --win-accent: #00b4d8;
+  --win-accent-hover: #48cae4;
+
+  /* Linux accent - orange/amber */
+  --linux-accent: #f77f00;
+  --linux-accent-hover: #fcbf49;
+
+  /* Semantic */
+  --success: #2ea043;
+  --warning: #d29922;
+  --danger: #f85149;
+
+  /* Text */
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #484f58;
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1a1f3a 100%);
+  --gradient-mac: linear-gradient(135deg, #0a84ff, #5e5ce6);
+  --gradient-win: linear-gradient(135deg, #00b4d8, #0077b6);
+  --gradient-linux: linear-gradient(135deg, #f77f00, #fcbf49);
+  --gradient-card: linear-gradient(145deg, rgba(22,27,34,0.9), rgba(31,41,55,0.7));
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--os-bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--os-bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--os-border-light); border-radius: 3px; }
+
+/* Glass effect */
+.glass {
+  background: var(--os-bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--os-border);
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(10,132,255,0.3); }
+  50% { box-shadow: 0 0 30px rgba(10,132,255,0.6); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes scan-line {
+  0% { top: 0; } 100% { top: 100%; }
+}
+
+.animate-fadeUp { animation: fadeUp 0.6s ease forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
