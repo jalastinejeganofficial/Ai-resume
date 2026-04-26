@@ -63,7 +63,7 @@ export default function ResumeUpload({ userId, onUploadComplete }: ResumeUploadP
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
         onDrop={handleDrop}
-        className={`relative border-2 border-dashed rounded-lg p-12 text-center transition-colors ${
+        className={`relative border-2 border-dashed rounded-lg p-6 sm:p-12 text-center transition-colors ${
           dragActive
             ? 'border-blue-500 bg-blue-50'
             : 'border-gray-300 hover:border-gray-400'
@@ -80,28 +80,28 @@ export default function ResumeUpload({ userId, onUploadComplete }: ResumeUploadP
 
         {uploading ? (
           <div className="space-y-4">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="text-gray-600">Uploading and parsing resume...</p>
-            {uploadedFile && <p className="text-sm text-gray-500">{uploadedFile}</p>}
+            <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <p className="text-sm sm:text-base text-gray-600">Uploading and parsing resume...</p>
+            {uploadedFile && <p className="text-xs sm:text-sm text-gray-500">{uploadedFile}</p>}
           </div>
         ) : error ? (
           <div className="space-y-4">
-            <AlertCircle className="h-12 w-12 text-red-500 mx-auto" />
-            <p className="text-red-600 font-medium">{error}</p>
+            <AlertCircle className="h-10 w-10 sm:h-12 sm:w-12 text-red-500 mx-auto" />
+            <p className="text-sm sm:text-base text-red-600 font-medium">{error}</p>
             <label
               htmlFor="resume-upload"
-              className="cursor-pointer inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="cursor-pointer inline-block px-4 sm:px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
             >
               Try Again
             </label>
           </div>
         ) : (
           <label htmlFor="resume-upload" className="cursor-pointer block">
-            <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-lg font-medium text-gray-700 mb-2">
+            <Upload className="h-10 w-10 sm:h-12 sm:w-12 text-gray-400 mx-auto mb-4" />
+            <p className="text-base sm:text-lg font-medium text-gray-700 mb-2">
               Drop your resume here or click to upload
             </p>
-            <p className="text-sm text-gray-500">Supports PDF and DOCX files</p>
+            <p className="text-xs sm:text-sm text-gray-500">Supports PDF and DOCX files</p>
           </label>
         )}
       </div>

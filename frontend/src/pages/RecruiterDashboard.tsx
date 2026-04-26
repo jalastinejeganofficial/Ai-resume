@@ -4,7 +4,7 @@ import { getRecruiterDashboard, getResumeDetail, analyzeResume } from '../servic
 import ResumeUpload from '../components/ResumeUpload';
 import ScoreDisplay from '../components/ScoreDisplay';
 import BiasReportComponent from '../components/BiasReport';
-import { Flag, Eye, Upload } from 'lucide-react';
+import { Flag, Eye, Upload, Users, TrendingUp } from 'lucide-react';
 
 export default function RecruiterDashboard() {
   const [selectedResume, setSelectedResume] = useState<number | null>(null);
@@ -38,22 +38,29 @@ export default function RecruiterDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">Recruiter Dashboard</h1>
-          <p className="mt-2 text-sm text-gray-600">Analyze and compare candidate resumes</p>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
+      <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="bg-white/20 p-2 rounded-lg">
+              <Users className="h-6 w-6" />
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-bold">Recruiter Tools</h1>
+          </div>
+          <p className="text-sm sm:text-base text-teal-100">Analyze and compare candidate resumes with advanced AI</p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Left Column - Resume List */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900">Resumes</h2>
-                <Upload className="h-5 w-5 text-gray-500" />
+            <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5 text-teal-600" />
+                  Candidates
+                </h2>
               </div>
               
               <ResumeUpload
@@ -69,10 +76,10 @@ export default function RecruiterDashboard() {
                       setSelectedResume(item.id);
                       setShowAnalysis(false);
                     }}
-                    className={`w-full text-left p-4 rounded-lg border transition-colors ${
+                    className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
                       selectedResume === item.id
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-gray-200 hover:border-gray-300'
+                        ? 'border-teal-500 bg-teal-50 shadow-md'
+                        : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
                     }`}
                   >
                     <div className="flex items-center justify-between">
@@ -83,7 +90,7 @@ export default function RecruiterDashboard() {
                         </p>
                       </div>
                       <div className="text-right">
-                        <p className="text-2xl font-bold text-blue-600">{item.overall_score}%</p>
+                        <p className="text-2xl font-bold text-teal-600">{item.overall_score}%</p>
                         {item.bias_flag && (
                           <span className="inline-flex items-center gap-1 text-xs text-orange-600">
                             <Flag className="h-3 w-3" />
@@ -112,7 +119,7 @@ export default function RecruiterDashboard() {
             ) : (
               <>
                 {/* Job Description Input */}
-                <div className="bg-white rounded-lg shadow-md p-6">
+                <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">
                     Job Description
                   </h3>
@@ -120,12 +127,12 @@ export default function RecruiterDashboard() {
                     value={jobDescription}
                     onChange={(e) => setJobDescription(e.target.value)}
                     placeholder="Paste the job description here to analyze resume match..."
-                    className="w-full h-32 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    className="w-full h-32 p-4 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none text-gray-700"
                   />
                   <button
                     onClick={handleAnalyze}
                     disabled={!jobDescription || analyzeMutation.isPending}
-                    className="mt-4 w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors font-medium"
+                    className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-lg hover:from-teal-700 hover:to-cyan-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all font-medium shadow-lg hover:shadow-xl disabled:shadow-none"
                   >
                     {analyzeMutation.isPending ? 'Analyzing...' : 'Analyze Resume'}
                   </button>
